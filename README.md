@@ -8,7 +8,7 @@ Study of HTMX usage using JSON Placeholder api.
 
 ## Notes
 
-Currently just two fetches: Fetch users and fetch posts.
+Currently contains get posts & users, and post new post & post new user.
 
 ### Fetch posts
 
@@ -43,3 +43,40 @@ Usercontrols (buttons) component needs to be repeated on top of the page that
 displays the data, as the user actually moves to a new location.
 
 ![screenshot](./assets/screenshot-users.png)
+
+### Create a new post with **hx-post**
+
+Route *posts/add* displays a form to create a new post.
+On submit, hx fires api/addPostQuery route which receives post request in handler and renders component with the returned data
+
+*posts/add:* Click create post (hx-post)  
+⬇️  
+*api/addPostRequest:* Handler POST method  
+⬇️  
+*api/addPostRequest:* JSON Placeholder API  
+⬇️  
+*api/addPostRequest:* Render.ctx in handler with returned data  
+⬇️  
+*api/addPostRequest:* return component with data in jsx  
+⬇️   
+*posts/add:* Replace form with returned JSX 
+
+The form is an **island**. Inserting hx result again replicates the navbar in the middle of the component.
+
+![screenshot](./assets/screenshot-newpost.png)
+
+### Create a new user with Fresh route handler
+
+Route *users/add* displays a form to create a new user.
+On submit, 
+`<form method="post">` sends a post request to **this same page**, where data is sent to JSON Placeholder API, received and rendered back to the component. 
+
+*users/add:* Click create user  
+⬇️  
+*users/add:*: Handler on same route handles POST method and sends data to API.  
+⬇️  
+*users/add:*: Render.ctx in handler returns data to component  
+⬇️  
+*users/add:*: When users data is present in the component, the new user details are rendered instead of the form.
+
+With this method, all action happens in the same component, and on **server-side**.

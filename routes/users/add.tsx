@@ -22,7 +22,6 @@ export const handler: Handlers = {
     });
 
     const user = await response.json();
-    console.log(user);
     return ctx.render(user);
   },
 };
@@ -85,7 +84,9 @@ export default function AddUser(props: PageProps) {
             />
           </div>
           <div>
-            <Button type="submit">Create by post request to same-page handler</Button>
+            <Button type="submit">
+              Create by post request to same-page handler
+            </Button>
           </div>
         </form>
       </div>
