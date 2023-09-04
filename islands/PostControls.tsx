@@ -14,11 +14,9 @@ export default function PostControls() {
           Get Posts using HTMX
         </Button>
         <Button
-          //    hx-get="/posts/AddPost"
-          hx-target="#post-container"
-          hx-swap="innerHTML"
         >
-          Add new post
+            <a href="/posts/add">Add new post</a>
+          
         </Button>
       </div>
       <div id="post-container" class="mx-20"></div>

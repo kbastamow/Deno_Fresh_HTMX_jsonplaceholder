@@ -7,7 +7,7 @@ export default function UserControls() {
       <Button>
         <a href="/api/userQuery">Get Users using route, component & handler</a>
       </Button>
-      <Button>Add new user</Button>
+      <Button><a href="/users/add">Add new user</a></Button>
     </div>
   );
 }
