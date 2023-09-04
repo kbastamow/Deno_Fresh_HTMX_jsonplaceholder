@@ -69,14 +69,14 @@ The form is an **island**. Inserting hx result again replicates the navbar in th
 
 Route *users/add* displays a form to create a new user.
 On submit, 
-`<form method="post">` sends a post request to **this same page**, where data is sent to JSON Placeholder API, received and rendered back to the component. 
+`<form method="post">` sends a post request to **this same page's handler**, where data is sent to JSON Placeholder API, received and rendered back to the component. 
 
 *users/add:* Click create user  
 ⬇️  
-*users/add:*: Handler on same route handles POST method and sends data to API.  
+*users/add:* Handler on same route handles POST method and sends data to API.  
 ⬇️  
-*users/add:*: Render.ctx in handler returns data to component  
+*users/add:* Render.ctx in handler renders component with the returned data from API.  
 ⬇️  
-*users/add:*: When users data is present in the component, the new user details are rendered instead of the form.
+*users/add:* When Api-returned data is present in the component, information about the new user is rendered instead of the form.
 
 With this method, all action happens in the same component, and on **server-side**.
