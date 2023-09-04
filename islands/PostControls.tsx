@@ -1,8 +1,6 @@
 import { Button } from "../components/Button.tsx";
 
 export default function PostControls() {
-  console.log("Rendering on client");
-
   return (
     <div>
       <div class="display flex justify-center my-5 gap-3">

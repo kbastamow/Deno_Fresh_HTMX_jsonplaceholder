@@ -17,7 +17,7 @@ function that fetches data from the api and returns it formatted in jsx (tsx).
 Instead of re-directing user to that route, the returning jsx is inserted in a
 specified section in the original page.
 
-The buttons to fire the htmx are **islands** rendered client side.
+The button to fire the htmx is an **island** rendered client side, since they premade `<Button>` component.
 
 ❗For some reason the method duplicates the NavBar component (inserted in
 _app.tsx).
@@ -61,7 +61,7 @@ On submit, hx fires api/addPostQuery route which receives post request in handle
 ⬇️   
 *posts/add:* Replace form with returned JSX 
 
-The form is an **island**. Inserting hx result again replicates the navbar in the middle of the component.
+Inserting hx result again replicates the navbar in the middle of the component.
 
 ![screenshot](./assets/screenshot-newpost.png)
 

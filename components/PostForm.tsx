@@ -40,7 +40,9 @@ export default function PostForm() {
             </textarea>
           </div>
           <div>
-            <Button type="submit">Create through HTMX</Button>
+          <button type="submit" class="px-2 py-1 border-black border-2 rounded bg-white hover:bg-black hover:text-white transition-colors">
+          Create through HTMX
+            </button>
           </div>
         </form>
       </div>

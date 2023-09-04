@@ -28,6 +28,7 @@ export const handler: Handlers = {
 
 export default function AddUser(props: PageProps) {
   const user = props.data || null;
+  console.log("Where am I rendered")
 
   if (user) {
     return (
@@ -84,9 +85,9 @@ export default function AddUser(props: PageProps) {
             />
           </div>
           <div>
-            <Button type="submit">
+            <button type="submit" class="px-2 py-1 border-black border-2 rounded bg-white hover:bg-black hover:text-white transition-colors">
               Create by post request to same-page handler
-            </Button>
+            </button>
           </div>
         </form>
       </div>

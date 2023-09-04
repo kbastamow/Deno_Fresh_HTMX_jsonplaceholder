@@ -1,4 +1,4 @@
-import PostForm from "../../islands/PostForm.tsx";
+import PostForm from "../../components/PostForm.tsx";
 
 export default function AddPost() {
     return (
