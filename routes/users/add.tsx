@@ -28,7 +28,6 @@ export const handler: Handlers = {
 
 export default function AddUser(props: PageProps) {
   const user = props.data || null;
-  console.log("Where am I rendered")
 
   if (user) {
     return (

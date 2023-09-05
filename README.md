@@ -19,8 +19,8 @@ specified section in the original page.
 
 The button to fire the htmx is an **island** rendered client side, since they premade `<Button>` component.
 
-❗For some reason the method duplicates the NavBar component (inserted in
-_app.tsx).
+❗~~  for some reason the method duplicates the NavBar component (inserted in _app.tsx) ~~ 
+**Since htmx fetches the whole page, whatever stable parts that would be displayed on that page (e.g. navbar) will be repeated**
 
 ```jsx
 <body>
@@ -80,3 +80,59 @@ On submit,
 *users/add:* When Api-returned data is present in the component, information about the new user is rendered instead of the form.
 
 With this method, all action happens in the same component, and on **server-side**.
+
+
+### Delete post with htmx
+
+Observations:
+
+❗Whatever hx fetches and inserts into the page **cannot contain** another component, as all styling disappears.
+
+For each row of post data, the idea was to return a delete button that contains the id of the post. But it doesn't seem to be possible to return a component inside the jsx for htmx.
+
+Attempted solution very convoluted: 
+- Insert hx fetch to *api/deletePost/[id]* that inserts a confirmation message into the table.
+- The confirmation message should be in another route, but a confirmation button needs to be an island, so bring a confirmation component that includes an island button that handles the request to delete the post from the api and redirects the post to the page that fetches the post list again.
+
+**Not feasible!**
+
+A simpler solution was implemented:
+
+For each fetched post, The postQuery renders a table cell with its own hx-GET call to *api/deletePost/[id]*.
+```jsx
+  <td 
+    hx-get={`/api/deletePost/${post.id}`}
+    hx-target={`#row-${post.id}`}
+    hx-swap="innerHTML">
+    Delete
+  </td>
+  ```
+  
+
+ This route contains a GET-handler method that sends a delete request to JSON Placeholder, and on successful response renders a component with a message that the post was deleted, which is finally inserted into the postQuery view.
+
+❗Downside: **No confirmation message before deletion.**
+
+### Delete user with pure Fresh
+
+The delete button in the table row is actually a modal component.
+
+The modal contains a confirmation to delete the user. Modal button is a handleClick function inside the component that sends a fetch to api/userQuery where DELETE method of the handler takes care of JSON placeholder api request.
+
+On successful response from the API, the modal show a brief message about the user being deleted, and the redirects the user to `window.location.href = "/api/userQuery"`, which is the GET-request to the handler and refetches the user list to show updated content (only theoretically, as JSON placeholder db isn't actually altered)
+
+SO:
+
+Delete button  
+⬇️   
+Modal confirmation
+⬇️  
+HandleClick  
+⬇️  
+*api/userQuery* DELETE handler method  
+⬇️   
+Modal success message  
+⬇️  
+*api/userQuery* GET handler method
+
+

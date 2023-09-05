@@ -5,14 +5,14 @@ interface Post {
   body: string;
 }
 
-export default async function postQuery() {
+export default async function PostQuery() {
   const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
     method: "GET",
   });
   const posts: Post[] = await response.json();
 
   return (
-    <table>
+    <table id="posts-table">
       <tr class="mt-5">
         <th>User id</th>
         <th>Post id</th>
@@ -22,14 +22,21 @@ export default async function postQuery() {
         <th></th>
       </tr>
       {posts.map((post) => (
-        <tr key={post.id} class="mt-5">
+        <>
+        <tr key={post.id} class="mt-5" id={`row-${post.id}`}>
           <td class="p-5 text-dark-600">{post.id}</td>
           <td class="p-5 text-dark-600">{post.userId}</td>
           <td class="p-5 text-dark-600">{post.title}</td>
           <td class="p-5 text-dark-600">{post.body}</td>
-          <td class="p-5 text-blue-900">Edit</td>
-          <td class="p-5  text-blue-900">Delete</td>
+          <td 
+            class="p-5 text-blue-900"
+            hx-get={`/api/deletePost/${post.id}`}
+            hx-target={`#row-${post.id}`}
+            hx-swap="innerHTML"
+          >Delete
+         </td>
         </tr>
+        </>
       ))}
     </table>
   );
