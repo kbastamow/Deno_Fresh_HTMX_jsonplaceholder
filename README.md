@@ -125,7 +125,7 @@ SO:
 
 Delete button  
 ⬇️   
-Modal confirmation
+Modal confirmation  
 ⬇️  
 HandleClick  
 ⬇️  
