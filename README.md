@@ -2,6 +2,19 @@
 
 ![fresh](./assets/fresh.ico) ![htmx](./assets/htmx.png)
 
+* [Description](#description)
+  * [Notes](#notes)
+    + [NavBar](#navbar)
+    + [Fetch posts with htmx](#fetch-posts-with-htmx)
+    + [Fetch users with Fresh](#fetch-users-with-fresh)
+    + [Create a new post with **hx-post**](#create-a-new-post-with---hx-post--)
+    + [Create a new user with Fresh route handler](#create-a-new-user-with-fresh-route-handler)
+    + [Delete post with htmx](#delete-post-with-htmx)
+    + [Delete user with Fresh with Fresh](#delete-user-with-fresh-with-fresh)
+    + [Edit post with htmx](#edit-post-with-htmx)
+    + [Edit user with Fresh](#edit-user-with-fresh)
+  * [Summary of observations](#summary-of-observations)
+
 ## Description
 
 Study of HTMX usage vs. using Deno Fresh's native routing and handlers.
@@ -28,28 +41,16 @@ Htmx's hx-requests fetch **the whole page** and insert it into an existing page,
 
 ➡️ `<NavBar>` Component now appears on top of every single page that requires it. Not particularly smooth coding.
 
-### Fetch posts
+### Fetch posts with htmx
 
 Fetches posts by calling a route in the app with htmx. The route contains a
 function that fetches data from the api and returns it formatted in jsx (tsx).
 Instead of re-directing user to that route, the returning jsx is inserted in a
 specified section in the original page.
 
-The button to fire the htmx is an **island** rendered client side, since they premade `<Button>` component.
+The button to fire the htmx is an **island** rendered client side, since it uses premade `<Button>` component.
 
-❗~~  for some reason the method duplicates the NavBar component (inserted in _app.tsx) ~~ 
-**Since htmx fetches the whole page, whatever stable parts that would be displayed on that page (e.g. navbar) will be repeated**
-
-```jsx
-<body>
-  <NavBar></NavBar>
-  <Component />
-</body>;
-```
-
-![screenshot](./assets/screenshot-posts.png)
-
-### Fetch users
+### Fetch users with Fresh
 
 Fetches users with Fresh's method by linking the user to a route where a Get
 handler fetches the data from the api and passes them onto the component.
@@ -79,10 +80,6 @@ On submit, hx fires api/addPostQuery route which receives post request in handle
 ⬇️   
 *posts/add:* Replace form with returned JSX 
 
-Inserting hx result again replicates the navbar in the middle of the component.
-
-![screenshot](./assets/screenshot-newpost.png)
-
 ### Create a new user with Fresh route handler
 
 Route *users/add* displays a form to create a new user.
@@ -96,9 +93,6 @@ On submit,
 *users/add:* Render.ctx in handler renders component with the returned data from API.  
 ⬇️  
 *users/add:* When Api-returned data is present in the component, information about the new user is rendered instead of the form.
-
-With this method, all action happens in the same component, and on **server-side**.
-
 
 ### Delete post with htmx
 
@@ -126,12 +120,11 @@ For each fetched post, The postQuery renders a table cell with its own hx-GET ca
   </td>
   ```
   
-
  This route contains a GET-handler method that sends a delete request to JSON Placeholder, and on successful response renders a component with a message that the post was deleted, which is finally inserted into the postQuery view.
 
 ❗Downside: **No confirmation message before deletion.**
 
-### Delete user with pure Fresh
+### Delete user with Fresh with Fresh
 
 The delete button in the table row is actually a modal component.
 
@@ -172,7 +165,7 @@ Hx replaces the form with the new data.
 
 ![screenshot](./assets/screenshot-editpost.png)
 
-### Edit user with pure Fresh
+### Edit user with Fresh
 
 Through **edit** button's `<a>` link, the user is redicted to a route *users/edit/:id* where id is the user's id. Passing through GET handler the specific post is retrieved from the database (or JSON placeholder) and the values appear in the edit form by default.
 
@@ -223,3 +216,12 @@ This allows us to render the component conditionally:
  else // -> Return error message
 ```
 
+## Summary of observations
+
+❗ This is a very limited investigation of htmx, and has only really explored hx-get/put/post/delete methods.
+There is surely a multitud of other utilities that might solve the problems encountered.
+
+- Particularly useful when back and front are separate projects. We can format the data from database on backend and return only html/jsx(?) to the front.
+- Very useful perhaps for programmers that use languages like Python as they might not need to use JavaScript at all due to the reason above.
+- Less useful for frameworks like Deno Fresh where the returned html takes the form of Preact components and pages are rendered on the server through backend routes. Leads to problems like with the NavBar component.
+- Deno Fresh already offers quite an agile routing, rendering, and handling requests through its handlers. Perhaps htmx is a bit redundant in this environment?
