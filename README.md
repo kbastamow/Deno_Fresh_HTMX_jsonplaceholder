@@ -14,6 +14,7 @@
     + [Edit post with htmx](#edit-post-with-htmx)
     + [Edit user with Fresh](#edit-user-with-fresh)
 * [Summary of observations](#summary-of-observations)
+* [Links](#links)
 
 ## Description
 
@@ -23,7 +24,7 @@ The app contains a **CRUD of posts** that explores htmx, and a **CRUD of users**
 
 JSON Placeholder api was used as mock db.
 
-![screenshot](./assets/screenshot-app.png)
+![screenshot](./assets/Screenshot-app.png)
 
 ## Notes
 
@@ -227,3 +228,8 @@ There is surely a multitud of other utilities that might solve the problems enco
 - Very useful perhaps for programmers that use languages like Python as they might not need to use JavaScript at all due to the reason above.
 - Less useful for frameworks like Deno Fresh where the returned html takes the form of Preact components and pages are rendered on the server through backend routes. Leads to problems like with the NavBar component.
 - Deno Fresh already offers quite an agile routing, rendering, and handling requests through its handlers. Perhaps htmx is a bit redundant in this environment?
+
+## Links
+
+- [*Deno Fresh*](https://fresh.deno.dev/)
+- [*HTMX*](https://htmx.org/docs/)
