@@ -3,7 +3,7 @@
 ![fresh](./assets/fresh.ico) ![htmx](./assets/htmx.png)
 
 * [Description](#description)
-  * [Notes](#notes)
+* [Notes](#notes)
     + [NavBar](#navbar)
     + [Fetch posts with htmx](#fetch-posts-with-htmx)
     + [Fetch users with Fresh](#fetch-users-with-fresh)
@@ -13,7 +13,7 @@
     + [Delete user with Fresh](#delete-user-with-fresh-with-fresh)
     + [Edit post with htmx](#edit-post-with-htmx)
     + [Edit user with Fresh](#edit-user-with-fresh)
-  * [Summary of observations](#summary-of-observations)
+* [Summary of observations](#summary-of-observations)
 
 ## Description
 
@@ -178,7 +178,6 @@ HANDLER receives the POST request:
 ```ts
  async POST(req, ctx) {...}
  ```
-
 
 But it is sent to JSON placeholder as PUT: 
 ```ts
