@@ -10,7 +10,7 @@
     + [Create a new post with **hx-post**](#create-a-new-post-with---hx-post--)
     + [Create a new user with Fresh route handler](#create-a-new-user-with-fresh-route-handler)
     + [Delete post with htmx](#delete-post-with-htmx)
-    + [Delete user with Fresh with Fresh](#delete-user-with-fresh-with-fresh)
+    + [Delete user with Fresh](#delete-user-with-fresh-with-fresh)
     + [Edit post with htmx](#edit-post-with-htmx)
     + [Edit user with Fresh](#edit-user-with-fresh)
   * [Summary of observations](#summary-of-observations)
