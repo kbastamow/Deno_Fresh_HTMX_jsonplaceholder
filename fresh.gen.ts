@@ -6,14 +6,17 @@ import * as $0 from "./routes/_404.tsx";
 import * as $1 from "./routes/_app.tsx";
 import * as $2 from "./routes/api/addPostQuery.tsx";
 import * as $3 from "./routes/api/deletePost/[id].tsx";
-import * as $4 from "./routes/api/postQuery.tsx";
-import * as $5 from "./routes/api/userQuery.tsx";
-import * as $6 from "./routes/index.tsx";
-import * as $7 from "./routes/posts/add.tsx";
-import * as $8 from "./routes/posts/index.tsx";
-import * as $9 from "./routes/users.tsx";
-import * as $10 from "./routes/users/add.tsx";
-import * as $11 from "./routes/users/index.tsx";
+import * as $4 from "./routes/api/editPostQuery.tsx";
+import * as $5 from "./routes/api/postQuery.tsx";
+import * as $6 from "./routes/api/userQuery.tsx";
+import * as $7 from "./routes/index.tsx";
+import * as $8 from "./routes/posts/add.tsx";
+import * as $9 from "./routes/posts/edit/[id].tsx";
+import * as $10 from "./routes/posts/index.tsx";
+import * as $11 from "./routes/users.tsx";
+import * as $12 from "./routes/users/add.tsx";
+import * as $13 from "./routes/users/edit/[id].tsx";
+import * as $14 from "./routes/users/index.tsx";
 import * as $$0 from "./islands/DeleteUserModal.tsx";
 import * as $$1 from "./islands/PostControls.tsx";
 
@@ -23,14 +26,17 @@ const manifest = {
     "./routes/_app.tsx": $1,
     "./routes/api/addPostQuery.tsx": $2,
     "./routes/api/deletePost/[id].tsx": $3,
-    "./routes/api/postQuery.tsx": $4,
-    "./routes/api/userQuery.tsx": $5,
-    "./routes/index.tsx": $6,
-    "./routes/posts/add.tsx": $7,
-    "./routes/posts/index.tsx": $8,
-    "./routes/users.tsx": $9,
-    "./routes/users/add.tsx": $10,
-    "./routes/users/index.tsx": $11,
+    "./routes/api/editPostQuery.tsx": $4,
+    "./routes/api/postQuery.tsx": $5,
+    "./routes/api/userQuery.tsx": $6,
+    "./routes/index.tsx": $7,
+    "./routes/posts/add.tsx": $8,
+    "./routes/posts/edit/[id].tsx": $9,
+    "./routes/posts/index.tsx": $10,
+    "./routes/users.tsx": $11,
+    "./routes/users/add.tsx": $12,
+    "./routes/users/edit/[id].tsx": $13,
+    "./routes/users/index.tsx": $14,
   },
   islands: {
     "./islands/DeleteUserModal.tsx": $$0,

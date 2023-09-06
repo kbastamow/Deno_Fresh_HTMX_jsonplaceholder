@@ -1,6 +1,7 @@
 import { HandlerContext, Handlers, PageProps } from "$fresh/server.ts";
 import { fromFileUrl } from "$std/path/win32.ts";
 import { Button } from "../../components/Button.tsx";
+import NavBar from "../../components/NavBar.tsx";
 import UserControls from "../../components/UserControls.tsx";
 
 export const handler: Handlers = {
@@ -32,6 +33,7 @@ export default function AddUser(props: PageProps) {
   if (user) {
     return (
       <>
+      <NavBar/>
         <div class="display flex flex-col justify-center items-center gap-7 mx-40 py-10 bg-gray-200">
           <h5 class="text-2xl">New user created:</h5>
           <p>Name: {user.name}</p>
@@ -46,6 +48,8 @@ export default function AddUser(props: PageProps) {
   }
 
   return (
+    <>
+    <NavBar/>
     <div>
       <div class="container">
         <form
@@ -91,5 +95,6 @@ export default function AddUser(props: PageProps) {
         </form>
       </div>
     </div>
+    </>
   );
 }

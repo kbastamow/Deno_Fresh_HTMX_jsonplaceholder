@@ -13,7 +13,7 @@ export default function DeleteUserModal({ id, name }) {
       setDeletedMessage("User mock-deleted");
       setTimeout(() => {
         window.location.href = "/api/userQuery";
-      }, 3000);
+      }, 2000);
     }
   };
 

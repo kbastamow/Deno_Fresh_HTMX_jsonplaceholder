@@ -1,4 +1,4 @@
-import { Handlers } from "$fresh/server.ts";
+import { Handlers, PageProps } from "$fresh/server.ts";
 
 export const handler: Handlers = {
   async GET(_req, ctx) {
@@ -13,12 +13,14 @@ export const handler: Handlers = {
       },
     );
     if (response.ok) {
-      return ctx.render();
+      return ctx.render({id});
+
     }
     console.log("Something went wrong")
   },
 };
 
-export default function Delete() {
-  return <div class="py-10 font-bold text-center">Post mock-deleted</div>;
+export default function Delete(props: PageProps) {
+
+  return <span class="block py-10 font-bold text-center w-full">Post {props.data.id} mock-deleted</span>;
 }

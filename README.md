@@ -4,11 +4,29 @@
 
 ## Description
 
-Study of HTMX usage using JSON Placeholder api.
+Study of HTMX usage vs. using Deno Fresh's native routing and handlers.
+JSON Placeholder api was used as mock db.
+
+The app contains a **CRUD of posts** that explores htmx, and a **CRUD of users** which is handled through pure Fresh routing and handlers. 
 
 ## Notes
 
-Currently contains get posts & users, and post new post & post new user.
+### NavBar
+
+Normally, the permanently visible navbar Component would appear in _app.tsx
+
+```tsx 
+   <body>
+      <NavBar></NavBar>
+        <Component />
+    </body>
+``` 
+> __Problem:__
+Htmx's hx-requests fetch **the whole page** and insert it into an existing page, so whatever stable parts that would be displayed on that page (e.g. navbar) will be repeated:
+
+![screenshot](./assets/screenshot-posts.png)
+
+➡️ `<NavBar>` Component now appears on top of every single page that requires it. Not particularly smooth coding.
 
 ### Fetch posts
 
@@ -135,4 +153,73 @@ Modal success message
 ⬇️  
 *api/userQuery* GET handler method
 
+### Edit post with htmx
+
+Delete button takes user to *posts/edit/:id* where id is the post's id.  
+⬇️   
+GET handler fetches the post from JSON PH and inserts old data as the default values into a form, which user can then update.   
+⬇️  
+Submit fires hx-put request to *api/editPostQuery*. The necessary post id is included in a hidden input in the form and sent together with the rest of the data.
+```ts
+<input type="hidden" name="id" value={post.id} />
+```
+⬇️  
+*api/editPostQuery* handler sends update request to API and, on success, returns component with the new data.  
+⬇️     
+Hx replaces the form with the new data.  
+⬇️  
+*api/userQuery* GET handler method
+
+![screenshot](./assets/screenshot-editpost.png)
+
+### Edit user with pure Fresh
+
+Through **edit** button's `<a>` link, the user is redicted to a route *users/edit/:id* where id is the user's id. Passing through GET handler the specific post is retrieved from the database (or JSON placeholder) and the values appear in the edit form by default.
+
+On submit, the form is sent to the same page with post method, HTML not accepting "put":
+```html
+<form method="post">
+```
+
+HANDLER receives the POST request:
+```ts
+ async POST(req, ctx) {...}
+ ```
+
+
+But it is sent to JSON placeholder as PUT: 
+```ts
+ const response = await fetch(
+  `https://jsonplaceholder.typicode.com/users/${id}`, {
+      method: "PUT",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ name, email, phone }),
+  }
+)
+```
+
+Depending on the handler method, we've specified the property names for the object that contain the post data.
+```ts 
+export const handler: Handlers = {
+    async GET(req, ctx) {
+    //...API CALL...
+    const post = await response.json()
+    return ctx.render({post})
+    },
+    async POST(req, ctx) {
+    //...API CALL...
+    const post = await response.json()
+    return ctx.render({editedPost})
+    }
+  }
+```
+This allows us to render the component conditionally:
+
+```ts
+ if (props.data.post) // -> Return form
+
+ if (props.data.editedPost) // -> Return edited post for user to see 
+
+ else // -> Return error message
+```
 

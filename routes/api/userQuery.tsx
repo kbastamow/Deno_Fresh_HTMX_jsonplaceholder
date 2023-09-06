@@ -2,6 +2,7 @@ import { HandlerContext, Handlers } from "$fresh/server.ts";
 import { PageProps } from "$fresh/server.ts";
 import DeleteUserModal from "../../islands/DeleteUserModal.tsx";
 import UserControls from "../../components/UserControls.tsx";
+import NavBar from "../../components/NavBar.tsx";
 
 interface User {
   id: number;
@@ -55,6 +56,7 @@ export default function UserQuery(props: PageProps) {
   const users: User[] = props.data;
   return (
     <>
+     <NavBar/>
       <UserControls></UserControls>
       <div id="user-container" class="mx-20 my-10">
         <table>
@@ -78,7 +80,7 @@ export default function UserQuery(props: PageProps) {
                 {user.address.city} {user.address.zipcode}q
               </td>
               <td class="p-5 text-blue-900">{user.phone}</td>
-              <td class="p-5 text-blue-900">Edit</td>
+              <td class="p-5 text-blue-900"><a href={`/users/edit/${user.id}`}>Edit</a></td>
               
      
                 <td class="p-5  text-blue-900"><DeleteUserModal id={user.id} name={user.name}></DeleteUserModal></td>

@@ -1,4 +1,3 @@
-import { context } from "https://deno.land/x/esbuild@v0.18.11/mod.js";
 import { HandlerContext, Handlers, PageProps } from "$fresh/server.ts";
 
 export const handler: Handlers = {

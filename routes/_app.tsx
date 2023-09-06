@@ -11,7 +11,6 @@ export default function App({ Component }: AppProps) {
         <title>fresh_jsonplaceholder</title>
       </head>
       <body>
-      <NavBar></NavBar>
         <Component />
       </body>
     </html>
