@@ -18,9 +18,12 @@
 ## Description
 
 Study of HTMX usage vs. using Deno Fresh's native routing and handlers.
-JSON Placeholder api was used as mock db.
 
 The app contains a **CRUD of posts** that explores htmx, and a **CRUD of users** which is handled through pure Fresh routing and handlers. 
+
+JSON Placeholder api was used as mock db.
+
+![screenshot](./assets/screenshot-app.png)
 
 ## Notes
 
